@@ -2,6 +2,7 @@
   "name": "turnwell",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "Turnwell — Property turnaround cleaning, Milton Keynes",
   "scripts": {
     "dev": "vite",
