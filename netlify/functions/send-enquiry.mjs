@@ -1,4 +1,4 @@
-import { sendEnquiry, jsonResponse } from './lib/email.mjs';
+import { sendEnquiry, jsonResponse } from '../../lib/email.mjs';
 
 export const handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') {

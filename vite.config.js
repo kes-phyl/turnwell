@@ -1,5 +1,5 @@
 import { defineConfig, loadEnv } from 'vite';
-import { sendEnquiry } from './netlify/functions/lib/email.mjs';
+import { sendEnquiry } from './lib/email.mjs';
 
 function enquiryApiPlugin(env) {
   return {

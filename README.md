@@ -17,39 +17,42 @@ npm run dev
 
 Open http://localhost:5173
 
-For production-like local testing (Netlify functions):
+## Deploy on Vercel
 
-```bash
-npm run dev:netlify
-```
+1. Import the GitHub repo at [vercel.com](https://vercel.com)
+2. Framework preset: **Vite** (auto detected)
+3. Build command: `npm run build`
+4. Output directory: `dist`
+5. Add environment variables (Settings → Environment Variables):
 
-Open http://localhost:8888
+| Variable | Required | Example |
+|----------|----------|---------|
+| `RESEND_API_KEY` | Yes | `re_xxxxxxxx` |
+| `FROM_EMAIL` | No | `Turnwell Enquiries <onboarding@resend.dev>` |
 
-## Contact form (email)
+6. Redeploy after adding env vars
 
-Submissions POST to `/api/enquiry` and are sent via [Resend](https://resend.com):
-
-- **To:** enquiries@turnwell.com (your inbox)
-- **To customer:** confirmation email automatically
-- **WhatsApp buttons:** still go directly to 07423 371686
-
-### Setup Resend (one time, ~5 minutes)
+### Resend setup
 
 1. Create account at [resend.com](https://resend.com)
-2. Copy your API key into `.env` as `RESEND_API_KEY`
-3. Verify your domain `turnwell.com` in Resend (required to send from `@turnwell.com`)
-4. Set `FROM_EMAIL=Turnwell Enquiries <enquiries@turnwell.com>` in `.env`
-5. On Netlify deploy: add the same env vars in Site settings > Environment variables
+2. Create an API key
+3. Verify `turnwell.com` in Resend (DNS records)
+4. Once verified, set `FROM_EMAIL` to `Turnwell Enquiries <enquiries@turnwell.com>`
+5. Until verified, use `Turnwell Enquiries <onboarding@resend.dev>`
 
-Until your domain is verified, Resend allows sending from `onboarding@resend.dev` for testing.
+Enquiries are sent to **enquiries@turnwell.com**. Customers receive a confirmation email.
+
+## Contact form
+
+The quote form POSTs to `/api/enquiry`, handled by a Vercel serverless function in `api/enquiry.mjs`.
+
+WhatsApp buttons link directly to **07423 371686**.
 
 ## Build for production
 
 ```bash
 npm run build
 ```
-
-Deploy the `dist/` folder to Netlify (recommended, functions included) or connect the Git repo.
 
 ## Before going live
 
