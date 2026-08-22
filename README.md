@@ -27,8 +27,9 @@ Open http://localhost:5173
 
 | Variable | Required | Example |
 |----------|----------|---------|
-| `RESEND_API_KEY` | Yes | `re_xxxxxxxx` |
+| `RESEND_API_KEY` | Yes | `re_xxxxxxxx` (value only, no `RESEND_API_KEY=` prefix) |
 | `FROM_EMAIL` | No | `Turnwell Enquiries <onboarding@resend.dev>` |
+| `TO_EMAIL` | No | `enquiries@turnwell.com` (where quote requests are sent) |
 
 6. Redeploy after adding env vars
 
