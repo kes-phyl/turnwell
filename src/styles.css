@@ -333,6 +333,8 @@ section { padding: 3.4rem 0; }
 .band-sand { background: var(--sand); }
 .band-forest { background: var(--forest); color: var(--ivory); }
 .band-forest h2, .band-forest p { color: var(--ivory); }
+.band-forest h2 { margin: 0 0 1.3rem; max-width: 14ch; }
+.band-forest .split-grid { gap: 2.2rem; }
 
 .section-copy {
   max-width: 34ch;
