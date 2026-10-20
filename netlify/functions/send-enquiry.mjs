@@ -1,4 +1,5 @@
 import { sendEnquiry, jsonResponse } from '../../lib/email.mjs';
+import { isHoneypot, isTooFast, normalizeEnquiry, validateEnquiry } from '../../lib/validate.mjs';
 
 export const handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') {
@@ -10,28 +11,20 @@ export const handler = async (event) => {
   }
 
   try {
-    const data = JSON.parse(event.body || '{}');
-    const required = ['name', 'phone', 'email', 'customer_type', 'property_type', 'postcode', 'service'];
+    const body = JSON.parse(event.body || '{}');
 
-    for (const field of required) {
-      if (!data[field]?.trim()) {
-        return jsonResponse(400, { error: `Missing field: ${field}` });
-      }
+    if (isHoneypot(body) || isTooFast(body)) {
+      return jsonResponse(200, { ok: true });
     }
 
-    await sendEnquiry({
-      name: data.name.trim(),
-      phone: data.phone.trim(),
-      email: data.email.trim(),
-      customer_type: data.customer_type.trim(),
-      property_type: data.property_type.trim(),
-      postcode: data.postcode.trim(),
-      service: data.service.trim(),
-      preferred_date: data.preferred_date?.trim() || '',
-      notes: data.notes?.trim() || '',
-    });
+    const checked = validateEnquiry(body);
+    if (!checked.ok) {
+      return jsonResponse(400, { error: checked.error });
+    }
 
-    return jsonResponse(200, { ok: true });
+    const data = normalizeEnquiry(body);
+    const result = await sendEnquiry(data);
+    return jsonResponse(200, { ok: true, estimate: result.estimate });
   } catch (err) {
     console.error('Enquiry error:', err);
     return jsonResponse(500, { error: 'Unable to send enquiry. Please try WhatsApp or call us.' });

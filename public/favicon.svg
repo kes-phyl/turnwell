@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Turnwell">
-  <rect width="512" height="512" rx="96" fill="#1B2A41"/>
-  <path fill="#A68B6A" d="M128 136h256v56H288v240h-64V192H128z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="turnwell">
+  <rect width="64" height="64" rx="14" fill="#1E3A2F"/>
+  <text x="7" y="46" fill="#FAF9F5" font-family="Georgia, 'Times New Roman', serif" font-size="32" font-weight="700" letter-spacing="-1.8">tw</text>
+  <path fill="#C9A586" d="M50.5 9 L52.1 14.6 L57.7 16.2 L52.1 17.8 L50.5 23.4 L48.9 17.8 L43.3 16.2 L48.9 14.6 Z"/>
 </svg>

@@ -1,4 +1,5 @@
 import { sendEnquiry } from '../lib/email.mjs';
+import { isHoneypot, isTooFast, normalizeEnquiry, validateEnquiry } from '../lib/validate.mjs';
 
 function parseBody(req) {
   if (req.body && typeof req.body === 'object') {
@@ -27,27 +28,20 @@ export default async function handler(req, res) {
 
   try {
     const body = parseBody(req);
-    const required = ['name', 'phone', 'email', 'customer_type', 'property_type', 'postcode', 'service'];
 
-    for (const field of required) {
-      if (!body[field]?.trim?.()) {
-        return res.status(400).json({ error: `Missing field: ${field}` });
-      }
+    if (isHoneypot(body) || isTooFast(body)) {
+      return res.status(200).json({ ok: true });
     }
 
-    await sendEnquiry({
-      name: body.name.trim(),
-      phone: body.phone.trim(),
-      email: body.email.trim(),
-      customer_type: body.customer_type.trim(),
-      property_type: body.property_type.trim(),
-      postcode: body.postcode.trim(),
-      service: body.service.trim(),
-      preferred_date: body.preferred_date?.trim() || '',
-      notes: body.notes?.trim() || '',
-    });
+    const checked = validateEnquiry(body);
+    if (!checked.ok) {
+      return res.status(400).json({ error: checked.error });
+    }
 
-    return res.status(200).json({ ok: true });
+    const data = normalizeEnquiry(body);
+    const result = await sendEnquiry(data);
+
+    return res.status(200).json({ ok: true, estimate: result.estimate });
   } catch (err) {
     console.error('Enquiry error:', err);
     return res.status(500).json({

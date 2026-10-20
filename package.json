@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Turnwell — Property turnaround cleaning, Milton Keynes",
+  "description": "Turnwell. Rug cleaning and home care, Milton Keynes.",
   "scripts": {
     "dev": "vite",
     "dev:netlify": "netlify dev",

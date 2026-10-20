@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-label="Turnwell">
-  <rect width="180" height="180" rx="34" fill="#1B2A41"/>
-  <path fill="#A68B6A" d="M45 48h90v20H97.5v76h-15V68H45z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-label="turnwell">
+  <rect width="180" height="180" rx="40" fill="#1E3A2F"/>
+  <text x="20" y="128" fill="#FAF9F5" font-family="Georgia, 'Times New Roman', serif" font-size="92" font-weight="700" letter-spacing="-4">tw</text>
+  <path fill="#C9A586" d="M142 24 L146.2 39.6 L161.8 43.8 L146.2 48 L142 63.6 L137.8 48 L122.2 43.8 L137.8 39.6 Z"/>
 </svg>

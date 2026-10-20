@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>small premises | turnwell</title>
+  <meta name="description" content="Scheduled cleaning for small offices, salons and shops in Milton Keynes.">
+  <link rel="canonical" href="https://www.turnwellclean.com/commercial.html">
+  <meta name="theme-color" content="#1E3A2F">
+  <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/styles.css">
+</head>
+<body data-page="commercial">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header id="site-header"></header>
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="container">
+        <p class="eyebrow">Commercial</p>
+        <h1>Offices, salons, shops.</h1>
+        <p class="lede">We look round, then quote.</p>
+        <a class="btn btn-primary" href="#site-visit">Ask for a visit</a>
+      </div>
+    </section>
+
+    <section class="band-sand" id="site-visit">
+      <div class="container narrow">
+        <h2>Site visit</h2>
+        <div class="form-success" data-form-success tabindex="-1">
+          <h3>Got it.</h3>
+          <p>We will call to arrange a look round.</p>
+        </div>
+        <form class="contact-form" data-enquiry-form>
+          <input class="hp" type="text" name="company_website" tabindex="-1" autocomplete="off">
+          <input type="hidden" name="enquiry_type" value="commercial">
+          <label>Business *
+            <input name="business_name" required>
+          </label>
+          <label>Your name *
+            <input name="name" required autocomplete="name">
+          </label>
+          <label>Email *
+            <input type="email" name="email" required autocomplete="email">
+          </label>
+          <label>Phone *
+            <input type="tel" name="phone" required autocomplete="tel">
+          </label>
+          <label>Postcode *
+            <input name="postcode" required autocomplete="postal-code">
+          </label>
+          <label>Premises *
+            <select name="premises_type" required>
+              <option value="">Select</option>
+              <option>Small office</option>
+              <option>Estate agency</option>
+              <option>Salon or barbershop</option>
+              <option>Retail</option>
+              <option>Managed property</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label>Size
+            <input name="approx_size" placeholder="80 sq m, 6 desks">
+          </label>
+          <label>How often
+            <select name="frequency">
+              <option value="">Select</option>
+              <option>Daily</option>
+              <option>A few times a week</option>
+              <option>Weekly</option>
+              <option>One-off</option>
+            </select>
+          </label>
+          <label class="full">Access or notes
+            <textarea name="notes"></textarea>
+          </label>
+          <div class="full">
+            <button class="btn btn-primary" type="submit">Send</button>
+            <p class="form-error" data-form-error role="alert"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+  <div class="mobile-bar" id="mobile-bar"></div>
+  <script type="module" src="/src/simple-form.js"></script>
+</body>
+</html>
