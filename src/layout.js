@@ -1,4 +1,5 @@
 import './motion.js';
+import './fields.js';
 
 const sparkle = `<svg class="brand-spark" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 0.8 L14.2 9.8 L23.2 12 L14.2 14.2 L12 23.2 L9.8 14.2 L0.8 12 L9.8 9.8 Z"/></svg>`;
 
