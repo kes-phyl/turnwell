@@ -1,5 +1,10 @@
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { defineConfig, loadEnv } from 'vite';
 import { sendEnquiry } from './lib/email.mjs';
+import { isHoneypot, isTooFast, normalizeEnquiry, validateEnquiry } from './lib/validate.mjs';
+
+const root = dirname(fileURLToPath(import.meta.url));
 
 function enquiryApiPlugin(env) {
   return {
@@ -22,21 +27,36 @@ function enquiryApiPlugin(env) {
           res.setHeader('Content-Type', 'application/json');
 
           try {
-            const data = JSON.parse(body || '{}');
+            const payload = JSON.parse(body || '{}');
             process.env.RESEND_API_KEY = env.RESEND_API_KEY;
             process.env.FROM_EMAIL = env.FROM_EMAIL;
+            process.env.TO_EMAIL = env.TO_EMAIL;
 
-            await sendEnquiry(data);
+            if (isHoneypot(payload) || isTooFast(payload)) {
+              res.statusCode = 200;
+              res.end(JSON.stringify({ ok: true }));
+              return;
+            }
+
+            const checked = validateEnquiry(payload);
+            if (!checked.ok) {
+              res.statusCode = 400;
+              res.end(JSON.stringify({ error: checked.error }));
+              return;
+            }
+
+            const result = await sendEnquiry(normalizeEnquiry(payload));
             res.statusCode = 200;
-            res.end(JSON.stringify({ ok: true }));
+            res.end(JSON.stringify({ ok: true, estimate: result.estimate }));
           } catch (err) {
             console.error('Dev enquiry error:', err.message);
-            res.statusCode = 500;
-            res.end(JSON.stringify({
-              error: env.RESEND_API_KEY
-                ? 'Unable to send enquiry. Please try WhatsApp or call us.'
-                : 'Email not configured locally. Add RESEND_API_KEY to .env',
-            }));
+            const missingKey = !env.RESEND_API_KEY || err.message?.includes('RESEND_API_KEY');
+            res.statusCode = missingKey ? 200 : 500;
+            res.end(JSON.stringify(
+              missingKey
+                ? { ok: true, warning: 'Email not configured locally. Add RESEND_API_KEY to .env to send messages.' }
+                : { error: 'Unable to send enquiry. Please try WhatsApp or call us.' }
+            ));
           }
         });
       });
@@ -48,5 +68,18 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
   return {
     plugins: [enquiryApiPlugin(env)],
+    build: {
+      rollupOptions: {
+        input: {
+          main: resolve(root, 'index.html'),
+          services: resolve(root, 'services.html'),
+          plans: resolve(root, 'plans.html'),
+          book: resolve(root, 'book.html'),
+          work: resolve(root, 'work.html'),
+          contact: resolve(root, 'contact.html'),
+          commercial: resolve(root, 'commercial.html'),
+        },
+      },
+    },
   };
 });

@@ -1,63 +1,58 @@
 # Turnwell Website
 
-Property turnaround cleaning, Milton Keynes.
+Home cleaning, carpet care and property turnaround services in Milton Keynes.
 
 ## Run locally
 
 ```bash
-npm install
+pnpm install
 cp .env.example .env
 ```
 
 Add your Resend API key to `.env`, then:
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 Open http://localhost:5173
 
+Without `RESEND_API_KEY`, forms still validate. Requests may be stored in `data/enquiries.jsonl`. Email sending is skipped.
+
+## Pages
+
+| Path | Purpose |
+|------|---------|
+| `/` | Homepage |
+| `/services.html` | Domestic and tenancy services |
+| `/plans.html` | Turnwell Home Care comparison |
+| `/book.html` | Guided booking request |
+| `/work.html` | Genuine job photos and reviews |
+| `/commercial.html` | Commercial site-visit enquiry |
+| `/contact.html` | Phone, WhatsApp and message form |
+
 ## Deploy on Vercel
 
 1. Import the GitHub repo at [vercel.com](https://vercel.com)
-2. Framework preset: **Vite** (auto detected)
-3. Build command: `npm run build`
+2. Framework preset: **Vite**
+3. Build command: `pnpm run build`
 4. Output directory: `dist`
-5. Add environment variables (Settings → Environment Variables):
+5. Environment variables:
 
 | Variable | Required | Example |
 |----------|----------|---------|
-| `RESEND_API_KEY` | Yes | `re_xxxxxxxx` (value only, no `RESEND_API_KEY=` prefix) |
+| `RESEND_API_KEY` | Yes | `re_xxxxxxxx` |
 | `FROM_EMAIL` | No | `Turnwell Enquiries <onboarding@resend.dev>` |
-| `TO_EMAIL` | No | `enquiries@turnwell.com` (where quote requests are sent) |
+| `TO_EMAIL` | No | `enquiries@turnwell.com` |
 
-6. Redeploy after adding env vars
+Enquiries POST to `/api/enquiry`. Customers receive an acknowledgement email. A submitted request is **not** a confirmed booking.
 
-### Resend setup
-
-1. Create account at [resend.com](https://resend.com)
-2. Create an API key
-3. Verify `turnwell.com` in Resend (DNS records)
-4. Once verified, set `FROM_EMAIL` to `Turnwell Enquiries <enquiries@turnwell.com>`
-5. Until verified, use `Turnwell Enquiries <onboarding@resend.dev>`
-
-Enquiries are sent to **enquiries@turnwell.com**. Customers receive a confirmation email.
-
-## Contact form
-
-The quote form POSTs to `/api/enquiry`, handled by a Vercel serverless function in `api/enquiry.mjs`.
-
-WhatsApp buttons link directly to **07423 371686**.
-
-## Build for production
-
-```bash
-npm run build
-```
+WhatsApp and phone use **07423 371686**.
 
 ## Before going live
 
-1. Verify turnwell.com in Resend
-2. Confirm enquiries@turnwell.com inbox is active
-3. Swap gallery photos for your own job photos when available
-4. Replace reviews with real Google reviews after first jobs
+1. Verify the sending domain in Resend
+2. Confirm `enquiries@turnwell.com` is monitored
+3. Add genuine job photographs to Our Work
+4. Publish reviews only when they can be verified
+5. Confirm subscription prices with the owner before showing monthly figures

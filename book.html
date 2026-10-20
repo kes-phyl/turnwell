@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>what needs doing? | turnwell</title>
+  <meta name="description" content="Pick a price for Home Care, carpets, a deep clean or end of tenancy in Milton Keynes.">
+  <link rel="canonical" href="https://www.turnwellclean.com/book.html">
+  <meta name="theme-color" content="#1E3A2F">
+  <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
+  <link rel="preconnect" href="https://api.fontshare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/styles.css">
+</head>
+<body data-page="book">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header id="site-header"></header>
+  <main id="main-content">
+    <section class="page-hero">
+      <div class="container narrow">
+        <p class="step-kicker" data-step-kicker>Pick one</p>
+        <h1 data-step-title>What needs doing?</h1>
+      </div>
+    </section>
+
+    <section style="padding-top:0.5rem;">
+      <div class="container narrow">
+        <div class="progress-track" aria-hidden="true"><div class="progress-fill" data-progress-fill></div></div>
+
+        <div class="form-success" data-form-success tabindex="-1">
+          <h3>Got it.</h3>
+          <p>We’ll come back on that, Mon to Sat, 8am to 6pm.</p>
+          <a class="btn btn-secondary" href="https://wa.me/447423371686">WhatsApp</a>
+        </div>
+
+        <form id="booking-form" class="wizard" novalidate>
+          <input class="hp" type="text" name="company_website" tabindex="-1" autocomplete="off">
+          <input type="hidden" name="enquiry_type" value="booking">
+
+          <div class="context-bar" data-context hidden>
+            <span data-service-label></span>
+            <button type="button" data-change-service>Change</button>
+          </div>
+
+          <div class="step" data-step="service">
+            <div class="choice-grid">
+              <label class="choice">
+                <input type="radio" name="service" value="regular" required>
+                <strong>Home Care</strong>
+                <span>Someone who comes back.</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="service" value="carpet">
+                <strong>Carpets and rugs</strong>
+                <span>Most stains come out.</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="service" value="deep">
+                <strong>Deep clean</strong>
+                <span>One hard reset.</span>
+              </label>
+              <label class="choice">
+                <input type="radio" name="service" value="end_of_tenancy">
+                <strong>End of tenancy</strong>
+                <span>Keys back Friday.</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="step" data-step="details" hidden>
+            <div data-for-service="carpet">
+              <p class="field-label">What are we cleaning?</p>
+              <div class="chips" style="margin-bottom:1rem;">
+                <label class="chip-choice"><input type="radio" name="carpet_kind" value="rug" required> Rug</label>
+                <label class="chip-choice"><input type="radio" name="carpet_kind" value="fitted"> Fitted carpet</label>
+              </div>
+              <div data-for-carpet="rug" hidden>
+                <p class="field-label">Size</p>
+                <div class="chips">
+                  <label class="chip-choice"><input type="radio" name="rug_size" value="rug_small"> By the door · £25</label>
+                  <label class="chip-choice"><input type="radio" name="rug_size" value="rug_medium"> Living room · £45</label>
+                  <label class="chip-choice"><input type="radio" name="rug_size" value="rug_large"> The heavy one · £75</label>
+                </div>
+              </div>
+              <div data-for-carpet="fitted" hidden style="margin-top:1rem;">
+                <p class="field-label">Rooms · £45 each</p>
+                <div class="chips" style="margin-bottom:1rem;">
+                  <label class="chip-choice"><input type="radio" name="carpet_rooms" value="1"> 1 · £45</label>
+                  <label class="chip-choice"><input type="radio" name="carpet_rooms" value="2"> 2 · £90</label>
+                  <label class="chip-choice"><input type="radio" name="carpet_rooms" value="3"> 3 · £135</label>
+                  <label class="chip-choice"><input type="radio" name="carpet_rooms" value="4"> 4 · £180</label>
+                </div>
+                <p class="field-label">Stairs</p>
+                <div class="chips">
+                  <label class="chip-choice"><input type="radio" name="include_stairs" value="no" checked> No stairs</label>
+                  <label class="chip-choice"><input type="radio" name="include_stairs" value="yes"> Stairs too · £55</label>
+                </div>
+              </div>
+              <label class="full" style="margin-top:1rem;">Stains or notes
+                <textarea name="stain_notes" placeholder="Pets, wine, the usual. Most stains come out."></textarea>
+              </label>
+              <label class="full">A photo helps
+                <input type="file" name="photos" accept="image/jpeg,image/png,image/webp" multiple>
+              </label>
+            </div>
+
+            <div data-for-service="regular" hidden>
+              <p class="field-label">Your price</p>
+              <div class="choice-grid" style="margin-bottom:1rem;">
+                <label class="choice">
+                  <input type="radio" name="plan" value="essential" required>
+                  <strong>£90 / month</strong>
+                  <span>Essential. Two visits, two hours.</span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="plan" value="plus">
+                  <strong>£130 / month</strong>
+                  <span>Plus. Three visits, two hours.</span>
+                </label>
+                <label class="choice">
+                  <input type="radio" name="plan" value="tailored">
+                  <strong>Quote me</strong>
+                  <span>Different hours or a bigger house.</span>
+                </label>
+              </div>
+              <div class="form-grid">
+                <label>Bedrooms
+                  <input type="number" name="bedrooms" min="1" max="10">
+                </label>
+                <label>Bathrooms
+                  <input type="number" name="bathrooms" min="1" max="10">
+                </label>
+              </div>
+            </div>
+
+            <div data-for-service="deep" hidden>
+              <p class="field-label">Your price</p>
+              <div class="chips">
+                <label class="chip-choice"><input type="radio" name="property_size" value="studio" required> Studio · £150</label>
+                <label class="chip-choice"><input type="radio" name="property_size" value="1bed"> 1 bed · £160</label>
+                <label class="chip-choice"><input type="radio" name="property_size" value="2bed"> 2 bed · £210</label>
+                <label class="chip-choice"><input type="radio" name="property_size" value="3bed"> 3 bed · £265</label>
+                <label class="chip-choice"><input type="radio" name="property_size" value="4bed"> 4 bed+ · £320</label>
+              </div>
+            </div>
+
+            <div data-for-service="end_of_tenancy" hidden>
+              <p class="field-label">Your price</p>
+              <div class="chips">
+                <label class="chip-choice"><input type="radio" name="property_size" value="studio" required> Studio · £180</label>
+                <label class="chip-choice"><input type="radio" name="property_size" value="1bed"> 1 bed · £200</label>
+                <label class="chip-choice"><input type="radio" name="property_size" value="2bed"> 2 bed · £250</label>
+                <label class="chip-choice"><input type="radio" name="property_size" value="3bed"> 3 bed · £320</label>
+                <label class="chip-choice"><input type="radio" name="property_size" value="4bed"> 4 bed+ · £390</label>
+              </div>
+            </div>
+
+            <div data-for-service="deep,end_of_tenancy" hidden>
+              <label class="full" style="margin-top:1rem;">Anything we should know
+                <textarea name="notes" placeholder="Keys, inventory Friday, extras"></textarea>
+              </label>
+            </div>
+
+            <div class="live-price" data-estimate></div>
+            <div class="wizard-nav">
+              <button class="btn btn-secondary" type="button" data-back>Back</button>
+              <button class="btn btn-primary" type="button" data-next>Continue</button>
+            </div>
+          </div>
+
+          <div class="step" data-step="you" hidden>
+            <div class="form-grid">
+              <label>Name *
+                <input name="name" required autocomplete="name">
+              </label>
+              <label>Phone *
+                <input type="tel" name="phone" required autocomplete="tel">
+              </label>
+              <label>Email *
+                <input type="email" name="email" required autocomplete="email">
+              </label>
+              <label>Postcode *
+                <input name="postcode" required autocomplete="postal-code" placeholder="MK9 2FB">
+              </label>
+              <label>Preferred day
+                <input type="date" name="preferred_date">
+              </label>
+              <label>Time
+                <select name="preferred_window">
+                  <option value="">Flexible</option>
+                  <option>Morning</option>
+                  <option>Afternoon</option>
+                </select>
+              </label>
+              <label class="full">Address
+                <input name="address" autocomplete="street-address">
+              </label>
+            </div>
+            <div class="live-price" data-commit></div>
+            <p class="notice">No payment.</p>
+            <div class="wizard-nav">
+              <button class="btn btn-secondary" type="button" data-back>Back</button>
+              <button class="btn btn-primary" type="submit">Send it</button>
+            </div>
+            <p class="form-error" data-form-error role="alert"></p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer id="site-footer"></footer>
+  <div class="mobile-bar" id="mobile-bar"></div>
+  <script type="module" src="/src/layout.js"></script>
+  <script type="module" src="/src/booking.js"></script>
+</body>
+</html>

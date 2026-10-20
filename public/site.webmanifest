@@ -1,7 +1,7 @@
 {
-  "name": "Turnwell",
-  "short_name": "Turnwell",
-  "description": "Property turnaround cleaning, Milton Keynes",
+  "name": "turnwell",
+  "short_name": "turnwell",
+  "description": "The house gets lived in. We put it right.",
   "icons": [
     {
       "src": "/favicon.svg",
@@ -14,7 +14,7 @@
       "type": "image/svg+xml"
     }
   ],
-  "theme_color": "#1B2A41",
-  "background_color": "#F7F5F2",
+  "theme_color": "#1E3A2F",
+  "background_color": "#FAF9F5",
   "display": "standalone"
 }
