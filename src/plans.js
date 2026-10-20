@@ -1,29 +1,15 @@
-const hover = window.matchMedia('(hover: hover) and (pointer: fine)');
-
 document.querySelectorAll('.plan').forEach((plan) => {
-  const details = plan.querySelector('details');
-  if (!details) return;
+  const radio = plan.querySelector('input[type="radio"]');
+  if (!radio) return;
 
-  const sync = (open) => {
-    if (plan.querySelector('input:checked')) {
-      details.open = true;
-      return;
-    }
-    details.open = open;
+  const select = () => {
+    if (radio.checked) return;
+    radio.checked = true;
+    radio.dispatchEvent(new Event('change', { bubbles: true }));
   };
 
-  plan.addEventListener('mouseenter', () => {
-    if (hover.matches) sync(true);
-  });
-
-  plan.addEventListener('mouseleave', () => {
-    if (hover.matches) sync(false);
-  });
-
-  plan.querySelector('input')?.addEventListener('change', () => {
-    document.querySelectorAll('.plan details').forEach((block) => {
-      const card = block.closest('.plan');
-      block.open = Boolean(card?.querySelector('input:checked'));
-    });
+  plan.addEventListener('click', (event) => {
+    if (event.target.closest('a')) return;
+    select();
   });
 });

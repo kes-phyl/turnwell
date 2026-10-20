@@ -149,6 +149,28 @@ header.is-scrolled { box-shadow: 0 8px 30px rgba(30, 58, 47, 0.06); }
   font-weight: 500;
 }
 
+.nav a {
+  position: relative;
+  transition: color 0.25s ease;
+}
+
+.nav a:not(.btn)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -5px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s var(--ease);
+}
+
+.nav a:not(.btn):hover { color: var(--clay-dark); }
+.nav a:not(.btn):hover::after,
+.nav a[aria-current="page"]::after { transform: scaleX(1); }
+
 .nav a[aria-current="page"] { color: var(--clay-dark); }
 .header-phone { color: var(--muted); }
 
@@ -359,7 +381,7 @@ section { padding: 3.4rem 0; }
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
-  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease);
+  transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), background 0.4s ease, border-color 0.4s ease, color 0.4s ease;
 }
 
 .service-tile:hover, .card:hover, .plan:hover {
@@ -375,12 +397,38 @@ section { padding: 3.4rem 0; }
 .service-tile:not(:has(img)) { background: var(--sand); border-color: transparent; }
 .service-tile img { aspect-ratio: 4 / 3; object-fit: cover; }
 .service-tile .tile-body, .card, .plan { padding: 1.2rem 1.25rem 1.35rem; }
-.card p, .plan p, .service-tile p { color: var(--muted); }
+.card p, .plan p, .service-tile p { color: var(--muted); transition: color 0.35s ease; }
 .card-link, .tile-go {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   margin-top: 0.8rem;
   font-weight: 600;
   font-size: 0.9rem;
+  color: var(--forest);
+  transition: color 0.3s ease, gap 0.35s var(--ease);
+}
+
+.card-link::after, .tile-go::after {
+  content: "";
+  width: 0.42rem;
+  height: 0.42rem;
+  border-right: 1.5px solid currentColor;
+  border-top: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.35s var(--ease);
+}
+
+.service-tile:hover .tile-go,
+.card:hover .card-link,
+.card-link:hover,
+.tile-go:hover { color: var(--clay-dark); }
+
+.service-tile:hover .tile-go::after,
+.card:hover .card-link::after,
+.card-link:hover::after,
+.tile-go:hover::after {
+  transform: rotate(45deg) translate(2px, -2px);
 }
 
 .plan {
@@ -405,20 +453,54 @@ section { padding: 3.4rem 0; }
   margin: 0.35rem 0 0.5rem;
 }
 
-.plan details { margin-top: 0.85rem; }
+.plan details { margin-top: 0.95rem; }
 
 .plan summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
   cursor: pointer;
-  font-size: 0.82rem;
+  font-size: 0.7rem;
   font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--sage);
   list-style: none;
+  border-top: 1px solid var(--border);
+  padding: 0.8rem 0 0.1rem;
+  transition: color 0.3s ease, border-color 0.35s ease;
 }
 
 .plan summary::-webkit-details-marker { display: none; }
-.plan summary::after { content: " +"; font-weight: 500; }
-.plan details[open] summary::after { content: ""; }
+.plan summary::after {
+  content: "";
+  width: 0.38rem;
+  height: 0.38rem;
+  flex-shrink: 0;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-135deg);
+  transition: transform 0.35s var(--ease);
+}
+.plan details:not([open]) summary::after { transform: rotate(45deg); }
+.plan summary:hover { color: var(--clay-dark); }
 .plan summary:focus { outline: none; }
+
+.plan:has(input:checked) summary {
+  color: var(--clay);
+  border-top-color: rgba(250, 249, 245, 0.18);
+}
+
+.plan-includes-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s var(--ease);
+}
+
+.plan details[open] .plan-includes-wrap { grid-template-rows: 1fr; }
+
+.plan-includes-wrap > * { overflow: hidden; }
 
 .plan-includes {
   list-style: none;
@@ -427,11 +509,26 @@ section { padding: 3.4rem 0; }
 }
 
 .plan-includes li {
-  font-size: 0.88rem;
+  position: relative;
+  font-size: 0.9rem;
   color: var(--muted);
-  padding: 0.28rem 0;
+  padding: 0.28rem 0 0.28rem 0.9rem;
   line-height: 1.35;
+  transition: color 0.35s ease;
 }
+
+.plan-includes li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 5px;
+  height: 5px;
+  border-radius: 1px;
+  background: var(--clay);
+  transform: rotate(45deg);
+}
+
 
 .plan .btn { margin-top: auto; width: 100%; display: inline-flex; padding-top: 1.1rem; }
 
@@ -734,6 +831,8 @@ footer {
 
 .footer-heading { color: var(--ivory); font-weight: 600; margin-bottom: 0.5rem; }
 footer a, .footer-grid p { display: block; margin: 0.22rem 0; color: rgba(250, 249, 245, 0.78); }
+footer a { transition: color 0.25s ease; }
+footer a:hover { color: var(--ivory); }
 .footer-meta { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 0.9rem; }
 
 .mobile-bar {
